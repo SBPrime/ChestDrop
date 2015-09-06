@@ -1,0 +1,13 @@
+/*/nbproject/private/
+/*/build/
+/dist/
+*/dist/
+*/lib/
+/*/test/
+lib/
+
+# Idea
+*.iml
+*.ipr
+*.iws
+.idea/

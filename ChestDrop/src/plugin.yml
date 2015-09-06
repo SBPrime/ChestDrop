@@ -1,0 +1,49 @@
+name: ChestDrop
+main: org.primesoft.chestDrop.ChestDropMain
+version: 0.1.1
+website: https://github.com/SBPrime/ChestsDrop/wiki
+dev-url: https://github.com/SBPrime/ChestsDrop/wiki
+description: This plugin provides random chest drop.
+authors: [SBPrime]
+depend: []
+softdepend: []
+commands:
+  cdreload:
+    description: 'Reload the configuration.'
+    permission: chestdrop.reload
+    usage: /<command> to reload the configuration
+  cddump:
+    aliases: [nbtdump, dumpnbt, nbt]
+    description: 'Dump the held item NBT data to console.'
+    permission: chestdrop.info
+    usage: /<command> to read hold item NBT
+  cdrandom:
+    description: 'Gives a random item from kit.'
+    permission: chestdrop.random
+    usage: /<command> <kit name>
+  cddrop:
+    description: 'Start a chest drop.'
+    permission: chestdrop.drop
+    usage: /<command> <kit name>
+permissions:
+  chestdrop.*:
+    description: Grants access to all permissions
+    default: op
+    children:      
+      chestdrop.reload: true
+      chestdrop.info: true
+      chestdrop.drop: true
+      chestdrop.random: true
+      chestdrop.use: true
+  chestdrop.reload:
+    description: Grants access to reload configuration
+    default: op
+  chestdrop.info:
+    description: Grants access to item NBT info command
+    default: op
+  chestdrop.drop:
+    description: Grants access to drop chest command
+    default: op
+  chestdrop.random:
+    description: Grants access to give random kit item command
+    default: op

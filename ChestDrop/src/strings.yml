@@ -1,0 +1,16 @@
+PLAYER_REQUIRED: "[RED]This command can't be run from the console."
+NO_PERMS: "[RED]You have no permissions to do that."
+#The reload command
+CMD_RELOAD_ERROR: "[RED]Error loading config"
+CMD_RELOAD_DONE: "[GREEN]Reload done"
+#The dump command
+CMD_DUMP_NO_ITEM: "[RED]No item in hand"
+CMD_DUMP_NBT: "[YELLOW]Item NBT:\n[WHITE]%1$s"
+CMD_DUMP_NO_NBT: "[YELLOW]Item has no NBT"
+#The give kit command
+CMD_KIT_NOT_FOUND: "[RED]Kit [YELLOE]%1$s [RED]not found"
+CMD_KIT_NO_ITEM: "[RED]Kit [YELLOE]%1$s [RED]has no items"
+#The drop chests command
+CMD_DROP_NOT_FOUND: "[RED]Kit [YELLOE]%1$s [RED]not found"
+CMD_DROP_NO_ITEM: "[RED]Kit [YELLOE]%1$s [RED]has no items"
+CMD_DROP: "[WHITE]%1$s [YELLOW]has arrived"

@@ -1,0 +1,45 @@
+[
+    {
+        "name": "monster_kit",
+        "displayName": "Monster kit",
+        "world": "world",
+        "region": [-20,-20,20,20],
+        "interval": 60,
+        "live": 20,
+        "chests": 10,
+        "minItems": 1,
+        "maxItems": 10,
+        "items": [
+            {
+                "id": "IRON_SWORD",
+                "data": 0,
+                "chance": 25,
+                "ammount": 1,
+                "nbt": {
+                    "ench": {
+                        "Type": "NBT_LIST",
+                        "ValueType": "NBT_COMPOUND",
+                        "Value": [
+                            {
+                                "lvl": { "Type": "NBT_SHORT", "Value": 1 },
+                                "id": { "Type": "NBT_SHORT", "Value": 17 }
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "id": 35,
+                "data": 10,
+                "chance": 75,
+                "ammount": 1,
+                "nbt": {
+                    "RepairCost": { "Type": "NBT_INT", "Value": 1 },
+                    "display": {
+                        "Name": { "Type": "NBT_STRING", "Value": "Purple monster" }
+                    }
+                }
+            }
+        ]
+    }
+]
