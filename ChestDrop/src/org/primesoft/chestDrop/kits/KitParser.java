@@ -404,7 +404,7 @@ public class KitParser {
 
         String customName = getString(jItem, "customName");
         Material m = getMaterial(jItem, "id");
-        int chance, ammount;
+        int chance, amount;
         short data;
 
         InOutParam<Integer> tmp = InOutParam.Out();
@@ -421,11 +421,11 @@ public class KitParser {
         }
         chance = tmp.getValue();
 
-        if (!getInt(jItem, "ammount", tmp)) {
-            log("Invalid item ammount");
+        if (!getInt(jItem, "amount", tmp)) {
+            log("Invalid item amount");
             return null;
         }
-        ammount = tmp.getValue();
+        amount = tmp.getValue();
         TagBase nbt = parseNbt(getObject(jItem, "nbt"));
 
         if (m == null) {
@@ -441,12 +441,12 @@ public class KitParser {
             log("Invalid item data");
             return null;
         }
-        if (ammount < 1) {
-            log("Invalid ammount");
+        if (amount < 1) {
+            log("Invalid amount");
             return null;
         }
 
-        return new KitItem(customName, m, data, ammount, chance, nbt);
+        return new KitItem(customName, m, data, amount, chance, nbt);
     }
 
     private static JSONObject getObject(JSONObject o, String entry) {

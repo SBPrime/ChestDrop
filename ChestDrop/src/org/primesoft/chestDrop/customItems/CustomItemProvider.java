@@ -124,11 +124,11 @@ public class CustomItemProvider {
      * @param itemName custom item name
      * @param material material data
      * @param data data
-     * @param ammount stack size
+     * @param amount stack size
      * @return
      */
     public ItemStack getCustomItem(String itemName,
-            Material material, short data, int ammount) {
+            Material material, short data, int amount) {
         if (itemName == null) {
             return null;
         }
@@ -145,7 +145,7 @@ public class CustomItemProvider {
         }
 
         try {
-            return provider.getCustomItem(itemName, material, data, ammount);
+            return provider.getCustomItem(itemName, material, data, amount);
         } catch (Exception ex) {
             ExceptionHelper.printException(ex, "Unable to create custom item");
             return null;

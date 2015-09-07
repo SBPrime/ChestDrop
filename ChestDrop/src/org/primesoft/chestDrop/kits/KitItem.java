@@ -117,10 +117,10 @@ public class KitItem {
         return is;
     }
     
-    KitItem(String customName, Material m, short data, int ammount, int chance, TagBase nbt) {
+    KitItem(String customName, Material m, short data, int amount, int chance, TagBase nbt) {
         m_material = m;
         m_data = data;
-        m_ammount = ammount;
+        m_ammount = amount;
         m_percentage = chance;
         m_nbt = nbt;
         m_customName = customName;

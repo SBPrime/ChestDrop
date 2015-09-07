@@ -60,9 +60,9 @@ public interface IItemProvider {
      * @param itemName custom item name
      * @param material material data
      * @param data data
-     * @param ammount stack size
+     * @param amount stack size
      * @return 
      */
     public ItemStack getCustomItem(String itemName, 
-            Material material, short data, int ammount);
+            Material material, short data, int amount);
 }

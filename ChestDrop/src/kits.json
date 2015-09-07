@@ -14,7 +14,7 @@
                 "id": "IRON_SWORD",
                 "data": 0,
                 "chance": 25,
-                "ammount": 1,
+                "amount": 1,
                 "nbt": {
                     "ench": {
                         "Type": "NBT_LIST",
