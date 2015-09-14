@@ -43,15 +43,12 @@ package org.primesoft.chestDrop.commands;
 import org.primesoft.utils.commands.BaseCommand;
 import java.util.ArrayList;
 import java.util.List;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.PlayerInventory;
 import org.primesoft.chestDrop.ChestDropMain;
 import static org.primesoft.chestDrop.ChestDropMain.say;
 import org.primesoft.chestDrop.kits.Kit;
-import org.primesoft.chestDrop.kits.KitItem;
 import org.primesoft.chestDrop.kits.KitProvider;
 import org.primesoft.chestDrop.strings.MessageType;
 
@@ -74,11 +71,6 @@ public class DropChestCommand  extends BaseCommand {
         }
 
         Player p = cs instanceof Player ? (Player) cs : null;
-
-        if (p == null) {
-            say(null, MessageType.PLAYER_REQUIRED.format());
-            return true;
-        }
 
         String kitName = args[0].toLowerCase();
         KitProvider kitProvider = m_pluginMain.getKitProvider();
