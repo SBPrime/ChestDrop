@@ -139,6 +139,11 @@ public class Kit {
      * Maximum number of items
      */
     private final int m_maxItems;
+    
+    /**
+     * The group name
+     */
+    private final String m_groupName;
 
     /**
      * Get the kit name
@@ -202,8 +207,16 @@ public class Kit {
     public World getWorld() {
         return m_world;
     }
+    
+    /**
+     * Get the group name
+     * @return 
+     */
+    public String getGroupName() {
+        return m_groupName;
+    }
 
-    Kit(String name, String displayName,
+    Kit(String name, String displayName, String groupName,
             KitItem[] items,
             int chests, int minItems, int maxItems,
             int interval, int live,
@@ -211,6 +224,7 @@ public class Kit {
         m_lastDrop = System.currentTimeMillis();
         m_oldDrop = new ArrayList<Location>();
         m_displayName = displayName;
+        m_groupName = groupName;
         m_chests = chests;
         m_interval = interval;
         m_minItems = minItems;

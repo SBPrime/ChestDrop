@@ -40,9 +40,11 @@
  */
 package org.primesoft.chestDrop;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Server;
@@ -118,9 +120,28 @@ public class DropManager implements Runnable, Listener {
             }
         }
 
+        HashMap<String, List<Kit>> kitsToDrop = new HashMap<String, List<Kit>>();
         for (Kit k : m_parent.getKitProvider().getKits()) {
             if (k.canSpawn(now)) {
-                dropKit(k);
+                String gName = k.getGroupName();
+                List<Kit> tmp;
+
+                if (!kitsToDrop.containsKey(gName)) {
+                    tmp = new ArrayList<Kit>();
+                    kitsToDrop.put(gName, tmp);
+                } else {
+                    tmp = kitsToDrop.get(gName);
+                }
+
+                tmp.add(k);
+            }
+        }
+
+        for (List<Kit> kitList : kitsToDrop.values()) {
+            boolean isFirst = true;
+            for (Kit k : kitList) {
+                dropKit(k, isFirst);
+                isFirst = false;
             }
         }
     }
@@ -259,8 +280,9 @@ public class DropManager implements Runnable, Listener {
      * Force kit drop
      *
      * @param kit
+     * @param sendMessage
      */
-    public void dropKit(Kit kit) {
+    public void dropKit(Kit kit, boolean sendMessage) {
         if (kit == null) {
             return;
         }
@@ -279,11 +301,13 @@ public class DropManager implements Runnable, Listener {
             }
         }
 
-        String msg = MessageProvider.formatMessage(MessageType.CMD_DROP, kit.getDisplayName());
-        for (Player p : m_parent.getServer().getOnlinePlayers()) {
-            say(p, msg);
+        if (sendMessage) {
+            String msg = MessageProvider.formatMessage(MessageType.CMD_DROP, kit.getDisplayName());
+            for (Player p : m_parent.getServer().getOnlinePlayers()) {
+                say(p, msg);
+            }
+            log(msg);
         }
-        log(msg);
     }
 
     /**

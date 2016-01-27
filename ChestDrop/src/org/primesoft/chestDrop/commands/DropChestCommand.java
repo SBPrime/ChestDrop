@@ -81,7 +81,7 @@ public class DropChestCommand  extends BaseCommand {
             return true;
         }
 
-        m_pluginMain.getDropManager().dropKit(kit);
+        m_pluginMain.getDropManager().dropKit(kit, true);
 
         return true;
     }

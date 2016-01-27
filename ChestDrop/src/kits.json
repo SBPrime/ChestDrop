@@ -1,10 +1,11 @@
 [
     {
         "name": "monster_kit",
+        "group": "default",
         "displayName": "Monster kit",
         "world": "world",
         "region": [-20,-20,20,20],
-        "interval": 60,
+        "interval": 10,
         "live": 20,
         "chests": 10,
         "minItems": 1,

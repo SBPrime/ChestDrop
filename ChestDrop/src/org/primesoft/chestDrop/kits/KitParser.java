@@ -277,6 +277,10 @@ public class KitParser {
 
         name = name.toLowerCase();
         
+        String kitGroup = getString(jKit, "group");
+        if (kitGroup == null || kitGroup.isEmpty()) {
+            kitGroup = name;
+        }
         String displayName = getString(jKit, "displayName");
         if (displayName == null || displayName.isEmpty()) {
             displayName = name;
@@ -385,7 +389,7 @@ public class KitParser {
             return null;
         }
 
-        return new Kit(name, displayName, kItems.toArray(new KitItem[0]),
+        return new Kit(name, displayName, kitGroup, kItems.toArray(new KitItem[0]),
             chestCount, minItems, maxItems,
                 interva, live,
                 from, to, world);
