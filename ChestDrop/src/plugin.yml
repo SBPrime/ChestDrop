@@ -1,6 +1,6 @@
 name: ChestDrop
 main: org.primesoft.chestDrop.ChestDropMain
-version: 0.1.2
+version: 0.1.3
 website: https://github.com/SBPrime/ChestsDrop/wiki
 dev-url: https://github.com/SBPrime/ChestsDrop/wiki
 description: This plugin provides random chest drop.
