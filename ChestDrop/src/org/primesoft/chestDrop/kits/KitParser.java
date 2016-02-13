@@ -437,7 +437,7 @@ public class KitParser {
             return null;
         }
 
-        if (chance < 1 || chance > 100) {
+        if (chance < 1/* || chance > 100*/) {
             log("Invalid item data. Chance must be in range <0, 100>");
             return null;
         }
