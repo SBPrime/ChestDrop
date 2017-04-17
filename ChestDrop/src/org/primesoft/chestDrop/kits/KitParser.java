@@ -269,14 +269,14 @@ public class KitParser {
             return null;
         }
 
-        String name = getString(jKit, "name");       
+        String name = getString(jKit, "name");
         if (name == null || name.isEmpty()) {
             log("No kit name defined");
             return null;
         }
 
         name = name.toLowerCase();
-        
+
         String kitGroup = getString(jKit, "group");
         if (kitGroup == null || kitGroup.isEmpty()) {
             kitGroup = name;
@@ -285,15 +285,14 @@ public class KitParser {
         if (displayName == null || displayName.isEmpty()) {
             displayName = name;
         }
-        
-        
+
         InOutParam<Integer> tmp = InOutParam.Out();
         int chestCount = -1;
         int interva = -1;
         int live = -1;
         int minItems = 1;
         int maxItems = 4;
-                
+
         if (getInt(jKit, "interval", tmp)) {
             interva = tmp.getValue();
         }
@@ -303,14 +302,14 @@ public class KitParser {
         if (getInt(jKit, "chests", tmp)) {
             chestCount = tmp.getValue();
         }
-        
+
         if (getInt(jKit, "minItems", tmp)) {
             minItems = tmp.getValue();
         }
         if (getInt(jKit, "maxItems", tmp)) {
             maxItems = tmp.getValue();
         }
-        
+
         if (minItems < 0) {
             minItems = 0;
         }
@@ -323,43 +322,57 @@ public class KitParser {
             maxItems = minItems;
             minItems = t;
         }
-        
+
         if (interva < 1) {
             log(String.format("Kit %1$s, interval < 1", name));
             return null;
         }
-        
+
         if (chestCount < 1) {
             log(String.format("Kit %1$s, Chest count < 1", name));
             return null;
         }
-        
+
         if (live < 1) {
             log(String.format("Kit %1$s, Chest live < 1", name));
             return null;
         }
-        
+
         Server server = Bukkit.getServer();
-        
-        
+
         String worldName = getString(jKit, "world");
         World world = server != null && worldName != null ? server.getWorld(worldName) : null;
-        
+
         if (world == null) {
             log(String.format("World %1$s not found.", worldName));
             return null;
         }
-        
+
         int[] region = parseRegion(getArray(jKit, "region"));
-        if (region == null || region.length != 4) {
-            log("Invalid region. You need to provide 4 coordinates (minX, minY, maxX, maxY)");
+        if (region == null || (region.length != 4 && region.length != 6)) {
+            log("Invalid region. You need to provide 4 coordinates (minX, minZ, maxX, maxZ) or 6 coordinates (minX, minY, minZ, maxX, maxY, maxZ)");
             return null;
         }
 
-        Vector from = new Vector(region[0], 0, region[1]);
-        Vector to = new Vector(region[2], 255, region[3]);
-        
-        
+        Vector from, to;
+
+        if (region.length == 4) {
+            from = new Vector(region[0], 0, region[1]);
+            to = new Vector(region[2], 255, region[3]);
+        } else {
+            int minY = Math.min(region[1], region[4]);
+            int maxY = Math.max(region[1], region[4]);
+            
+            if (minY < 0 || maxY > world.getMaxHeight()) {
+                log(String.format("Invalid Y range. Valid range is: %1$s to %2$s.", 0, world.getMaxHeight()));
+                return null;
+            }
+            
+            
+            from = new Vector(region[0], region[1], region[2]);
+            to = new Vector(region[3], region[4], region[5]);
+        }
+
         JSONArray items = getArray(jKit, "items");
         if (items == null) {
             log(String.format("No items defined for kit %1$s.", name));
@@ -390,7 +403,7 @@ public class KitParser {
         }
 
         return new Kit(name, displayName, kitGroup, kItems.toArray(new KitItem[0]),
-            chestCount, minItems, maxItems,
+                chestCount, minItems, maxItems,
                 interva, live,
                 from, to, world);
     }
@@ -578,7 +591,7 @@ public class KitParser {
             case NBT_END:
                 return new TagEnd();
         }
-        
+
         return null;
     }
 
@@ -587,7 +600,7 @@ public class KitParser {
             return null;
         }
 
-        TagCompound result = new TagCompound();        
+        TagCompound result = new TagCompound();
         HashMap<String, TagBase> entries = result.Tags();
 
         for (Object k : o.keySet()) {
@@ -602,7 +615,7 @@ public class KitParser {
             if (childTag == null) {
                 continue;
             }
-            
+
             entries.put(key, childTag);
         }
 
@@ -730,26 +743,26 @@ public class KitParser {
         }
     }
 
-    
     /**
      * Parse the region entry
+     *
      * @param array
-     * @return 
+     * @return
      */
     private static int[] parseRegion(JSONArray array) {
         if (array == null) {
             return null;
         }
-        
+
         List<Integer> result = new ArrayList<Integer>();
         for (Object jObj : array) {
             if (!(jObj instanceof Long)) {
                 continue;
             }
-            
-            result.add(((Long)jObj).intValue());
+
+            result.add(((Long) jObj).intValue());
         }
-        
+
         return ArrayHelper.toPrimitives(result.toArray(new Integer[0]));
     }
 }

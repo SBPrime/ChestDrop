@@ -302,24 +302,26 @@ public class Kit {
         m_lastDrop = System.currentTimeMillis();
 
         int minX = Math.min(m_from.getBlockX(), m_to.getBlockX());
+        int minY = Math.min(m_from.getBlockY(), m_to.getBlockY());
         int minZ = Math.min(m_from.getBlockZ(), m_to.getBlockZ());
 
         int maxX = Math.max(m_from.getBlockX(), m_to.getBlockX());
+        int maxY = Math.max(m_from.getBlockY(), m_to.getBlockY());
         int maxZ = Math.max(m_from.getBlockZ(), m_to.getBlockZ());
 
         for (int i = 0; i < m_chests; i++) {
             int x = s_rnd.nextInt(maxX - minX) + minX;
             int z = s_rnd.nextInt(maxZ - minZ) + minZ;
 
-            int y = 255;
+            int y = maxY;
             Location l = null;
             Material m = Material.AIR;
-            for (; y >= 0 && (m == Material.AIR || m == Material.WATER || m == Material.STATIONARY_WATER); y--) {
+            for (; y >= minY && (m == Material.AIR || m == Material.WATER || m == Material.STATIONARY_WATER); y--) {
                 l = new Location(m_world, x, y, z);
                 m = l.getBlock().getType();
             }
 
-            if (y < 0 || l == null) {
+            if (y < minY || l == null) {
                 continue;
             }
 
