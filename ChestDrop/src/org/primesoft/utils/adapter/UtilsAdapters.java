@@ -43,6 +43,7 @@ package org.primesoft.utils.adapter;
 import org.primesoft.utils.adapter.v1_8_R3.Spigot_v1_8_R3;
 import org.primesoft.utils.Func;
 import org.primesoft.utils.adapter.v1_10_R1.Spigot_v1_10_R1;
+import org.primesoft.utils.adapter.v1_11_R1.Spigot_v1_11_R1;
 import org.primesoft.utils.adapter.v1_9_R1.Spigot_v1_9_R1;
 import org.primesoft.utils.adapter.v1_9_R2.Spigot_v1_9_R2;
 
@@ -75,6 +76,12 @@ enum UtilsAdapters {
         @Override
         public IUtilsAdapter execute() {
             return Spigot_v1_10_R1.getInstance();
+        }
+    }),
+    v1_11_R1("v1_11_R1", new Func<IUtilsAdapter>() {
+        @Override
+        public IUtilsAdapter execute() {
+            return Spigot_v1_11_R1.getInstance();
         }
     })
     ;
