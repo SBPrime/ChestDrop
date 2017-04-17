@@ -315,13 +315,21 @@ public class Kit {
 
             int y = maxY;
             Location l = null;
-            Material m = Material.AIR;
-            for (; y >= minY && (m == Material.AIR || m == Material.WATER || m == Material.STATIONARY_WATER); y--) {
+            Material m = Material.STONE;
+            Material lastM = Material.STONE;
+            
+            for (; y >= minY; y--) {
+                lastM = m;
                 l = new Location(m_world, x, y, z);
                 m = l.getBlock().getType();
+                
+                if (lastM == Material.AIR && 
+                     m != Material.AIR && m != Material.WATER && m != Material.STATIONARY_WATER) {
+                    break;
+                }
             }
 
-            if (y < minY || l == null) {
+            if (y < minY || l == null || lastM != Material.AIR) {
                 continue;
             }
 
